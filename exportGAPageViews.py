@@ -38,6 +38,7 @@ def get_report(analytics, date, pageToken = None):
                                     {'expression': 'ga:timeOnPage'},
                                     {'expression': 'ga:pageLoadTime'}],
                         'dimensions': [{'name': 'ga:dateHourMinute'},
+                                       {'name': 'ga:dimension1'}, # UserID
                                        {'name': 'ga:pageTitle'},
                                        {'name': 'ga:pagePath'},
                                        {'name': 'ga:pageDepth'}],
@@ -58,6 +59,7 @@ def get_report(analytics, date, pageToken = None):
                                     {'expression': 'ga:timeOnPage'},
                                     {'expression': 'ga:pageLoadTime'}],
                         'dimensions': [{'name': 'ga:dateHourMinute'},
+                                       {'name': 'ga:dimension1'}, # UserID
                                        {'name': 'ga:pageTitle'},
                                        {'name': 'ga:pagePath'},
                                        {'name': 'ga:pageDepth'}],
@@ -141,10 +143,11 @@ def getMonthData(year, month):
                        'ga:timeOnPage' : 'TimeOnPage',
                        'ga:pageLoadTime' : 'PageLoadTime',
                        'ga:dateHourMinute' : 'Time',
+                       'ga:dimension1' : 'UserID',
                        'ga:pageTitle' : 'PageTitle',
                        'ga:pagePath' : 'PagePath',
                        'ga:pageDepth' : 'PageDepth'}, inplace = True)
-    df.reindex(['Time', 'PageTitle', 'PagePath', 'PageDepth', 'UniquePageViews',
+    df.reindex(['Time', 'UserID', 'PageTitle', 'PagePath', 'PageDepth', 'UniquePageViews',
                           'PageViews', 'TimeOnPage','PageLoadTime'], axis = 1, inplace = True)
     df['Time'] = pd.to_datetime(df['Time'], errors = 'coerce')
     df = df.dropna()
