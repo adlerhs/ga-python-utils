@@ -87,7 +87,7 @@ def reportToList(report):
       for i, values in enumerate(dateRangeValues):
         for metric, value in zip(metricHeaders, values.get('values')):
             #set int as int, float a float
-            if ',' in value or ',' in value:
+            if ',' in value or '.' in value:
               dict[metric.get('name')] = float(value)
             else:
               dict[metric.get('name')] = int(value)
@@ -148,10 +148,10 @@ def getMonthData(year, month):
                        'ga:pagePath' : 'PagePath',
                        'ga:pageDepth' : 'PageDepth'}, inplace = True)
     df.reindex(['Time', 'UserID', 'PageTitle', 'PagePath', 'PageDepth', 'UniquePageViews',
-                          'PageViews', 'TimeOnPage','PageLoadTime'], axis = 1, inplace = True)
+                          'PageViews', 'TimeOnPage','PageLoadTime'], axis = 1)
     df['Time'] = pd.to_datetime(df['Time'], errors = 'coerce')
     df = df.dropna()
-    df.to_csv("Events-{}-{}.csv".format(year, month), encoding='utf-8', index=False, line_terminator='\n')
+    df.to_csv("PageViews-{}-{}.csv".format(year, month), encoding='utf-8', index=False, line_terminator='\n')
 
 months = [(2017, 5),
           (2017, 6),
