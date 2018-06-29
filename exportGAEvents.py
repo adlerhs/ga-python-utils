@@ -85,7 +85,7 @@ def reportToList(report):
       for i, values in enumerate(dateRangeValues):
         for metric, value in zip(metricHeaders, values.get('values')):
             #set int as int, float a float
-            if ',' in value or ',' in value:
+            if ',' in value or '.' in value:
               dict[metric.get('name')] = float(value)
             else:
               dict[metric.get('name')] = int(value)
